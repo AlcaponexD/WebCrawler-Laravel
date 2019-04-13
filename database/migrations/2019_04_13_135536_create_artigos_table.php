@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateArtigosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('artigos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user');
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('id_user')->comment('id referente ao usuario que gravou o artigo');
+            $table->string(',title', 100)->comment('Titulo do artigo');
+            $table->string('link',500)->comment('link do artigo externo');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('artigos');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArtigosTable extends Migration
+class CreateArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateArtigosTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_user')->comment('id referente ao usuario que gravou o artigo');
-            $table->string(',title', 100)->comment('Titulo do artigo');
+            $table->string('title', 100)->comment('Titulo do artigo');
             $table->string('link',500)->comment('link do artigo externo');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateArtigosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('artigos');
+        Schema::dropIfExists('articles');
     }
 }

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap/-css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <title>Pesquisar</title>
 </head>
 <body>
@@ -16,11 +17,11 @@
         </button>
         <div id="navbarNavDropdown" class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="">Pesquisar <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./articles">Artigos</a>
+                    <a class="nav-link" href="./dashboard">Pesquisar</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Artigos <span class="sr-only">(current)</span></a>
                 </li>
 
 
@@ -33,30 +34,23 @@
         </div>
     </nav>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-            <form class="card card-sm">
-                <div class="card-body row no-gutters align-items-center">
-                    <div class="col-auto">
-                        <i class="fas fa-search h4 text-body"></i>
-                    </div>
-                    <!--end of col-->
-                    <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Digite aqui sua pesquisa">
-                    </div>
-                    <!--end of col-->
-                    <div class="col-auto">
-                        <button class="btn btn-lg btn-success" id="buscar" type="button">Search</button>
-                    </div>
-                    <!--end of col-->
-                </div>
-            </form>
-        </div>
-        <!--end of col-->
-    </div>
+    <table id="artigos" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Link</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 
 <script>
@@ -64,49 +58,43 @@
     $(function() {
         header();
         user(id);
+        articles();
+
 
     });
 
+    function articles() {
+        $.ajax({
+            url:'/api/admin/show_articles',
+            type:'get',
+            success:function (data) {
+                for(i = 0 ; i < data.length; i++)
+                {
+                    var html = '<tr id="'+data[i].id+'">';
+                    html += '<td>'+data[i].id+'</td>';
+                    html += '<td>'+data[i].title+'</td>';
+                    html += '<td>'+data[i].link+'</td>';
+                    html += '<td><button onclick="delete_article('+data[i].id+')">Deletar</button></td>';
+                    html += '</tr>';
+                    $('tbody').append(html);
+                }
+            },
+            complete: function () {
+                $('#artigos').DataTable();
+            }
+        })
 
-
-    $('#buscar').on('click', function (e) {
-        e.preventDefault;
-       var busca = $('[type=search]').val();
-       var dados = new FormData();
-       dados['busca'] = busca;
-       console.log(busca);
+    }
+    function delete_article(id){
+        $('#'+id+'').remove();
 
         $.ajax({
-            type: "POST",
-            url: "/api/admin/get_contents",
-            data: JSON.stringify(dados),
-            processData: false,
-            contentType: 'application/json',
-            beforeSend: function() {
-                $('form').append('<img id="loader" src="https://loading.io/spinners/typing/lg.-text-entering-comment-loader.gif" height="50px" width="50px" class="text-center">')
-            },
+            url:'/api/admin/delete/article/'+id,
+            type:'delete',
             success:function (data) {
-                $("#loader").remove();
-                if(data.status == 'true'){
-                    $('.alert').remove();
-                    $('form').append('<div class="alert alert-success text-center" role="alert">Dados gravados com sucesso</div>')
-                }else{
-                    $('.alert').remove();
-                    $('form').append('<div class="alert alert-danger text-center" role="alert">Nenhum resultado encontrado</div>')
-                }
-
-            },
-            error: function(error) {
-                console.log(error)
             }
-        });
-    });
-
-
-
-
-
-
+        })
+    }
     function user(id)
     {
         $.ajax({

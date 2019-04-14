@@ -3,7 +3,7 @@ Aplicação desenvolvida para buscar artigos no site uplexis.com.br/blog e grava
 
 Desenvolvido API e utilizado ajax para o consumo do mesmo.
 
-###Instruções para rodar a aplicação : 
+##Instruções para rodar a aplicação : 
 
 
 ►composer install.
@@ -23,7 +23,7 @@ Desenvolvido API e utilizado ajax para o consumo do mesmo.
 ►Acesso pela url http://localhost:8000/
 
 
-###Informações de servidor utilizados:
+##Informações de servidor utilizados:
 Apache/2.4.35 (Win32) OpenSSL/1.1.0i PHP/7.2.11
 
 Versão do cliente de base de dados: libmysql - mysqlnd 5.0.12

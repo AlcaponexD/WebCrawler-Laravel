@@ -13,7 +13,7 @@ class CreateArtigosTable extends Migration
      */
     public function up()
     {
-        Schema::create('artigos', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_user')->comment('id referente ao usuario que gravou o artigo');
             $table->string(',title', 100)->comment('Titulo do artigo');

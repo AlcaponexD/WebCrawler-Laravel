@@ -30,7 +30,7 @@
                     </div>
                     <!--end of col-->
                     <div class="col-auto">
-                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                        <button class="btn btn-lg btn-success" id="buscar" type="button">Search</button>
                     </div>
                     <!--end of col-->
                 </div>
@@ -49,7 +49,36 @@
         user(id);
 
     });
-    
+
+
+
+    $('#buscar').on('click', function (e) {
+        e.preventDefault;
+       var busca = $('[type=search]').val();
+       var dados = new FormData();
+       dados['busca'] = busca;
+       console.log(busca);
+
+        $.ajax({
+            type: "POST",
+            url: "/api/admin/get_contents",
+            data: JSON.stringify(dados),
+            processData: false,
+            contentType: 'application/json',
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+    });
+
+
+
+
+
+
     function user(id)
     {
         $.ajax({

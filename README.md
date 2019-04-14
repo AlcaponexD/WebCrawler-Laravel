@@ -1,5 +1,5 @@
 # upLexis
-Aplicação desenvolvida para buscar artigos no site uplexis.com.br/blog e gravar no banco de dados o titulo e url.
+Aplicação desenvolvida para buscar artigos no site uplexis.com.br/blog e gravar no banco de dados o titulo e link.
 
 Desenvolvido API e utilizado ajax para o consumo do mesmo.
 

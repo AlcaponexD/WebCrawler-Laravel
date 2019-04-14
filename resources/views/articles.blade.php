@@ -28,6 +28,9 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <span class="user nav-link"></span>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" id="logout" href="#">Logout</a>
                 </li>
             </ul>
@@ -74,7 +77,7 @@
                     html += '<td>'+data[i].id+'</td>';
                     html += '<td>'+data[i].title+'</td>';
                     html += '<td>'+data[i].link+'</td>';
-                    html += '<td><button onclick="delete_article('+data[i].id+')">Deletar</button></td>';
+                    html += '<td><button class="btn btn-block btn-danger" onclick="delete_article('+data[i].id+')">Deletar</button></td>';
                     html += '</tr>';
                     $('tbody').append(html);
                 }
@@ -101,7 +104,7 @@
             url:'/api/admin/show/'+id,
             type:'get',
             success:function (data) {
-                console.log(data)
+                $('.user').text(data.user)
             },
             error: function (data) {
                 var errors = $.parseJSON(data.responseText);

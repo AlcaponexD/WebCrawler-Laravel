@@ -10,6 +10,7 @@ class ArticleController extends Controller
 {
     public function get_contents(Request $request)
     {
+        //Trata o parametro da pesquisa antes de enviar
       $dados =  preg_replace("/\s+/", "+", $request->only('busca'));
       $content = file_get_contents('https://www.uplexis.com.br/blog/?s='.$dados['busca']);
       $pattern = "'<div class=\"col-md-6 title\">(.*?)</a>'si";
@@ -40,9 +41,6 @@ class ArticleController extends Controller
 
         //Pega o codigo bruto de varias postagens(menores)
        $small_articles =  preg_match_all($pattern2,  $content, $matches2);
-
-
-
 
 
        //Recupera usuário autenticado

@@ -27,6 +27,9 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <span class="user nav-link"></span>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" id="logout" href="#">Logout</a>
                 </li>
             </ul>
@@ -113,7 +116,7 @@
             url:'/api/admin/show/'+id,
             type:'get',
             success:function (data) {
-                console.log(data)
+                $('.user').text(data.user)
             },
             error: function (data) {
                 var errors = $.parseJSON(data.responseText);

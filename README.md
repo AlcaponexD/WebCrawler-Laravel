@@ -28,6 +28,8 @@ https://documenter.getpostman.com/view/6064006/S1ENzzFp
 
 
 ### Informações de servidor utilizados:
+Collation usada: utf8mb4_unicode_ci
+
 Apache/2.4.35 (Win32) OpenSSL/1.1.0i PHP/7.2.11
 
 Versão do cliente de base de dados: libmysql - mysqlnd 5.0.12

@@ -3,6 +3,10 @@ Aplicação desenvolvida para buscar artigos no site uplexis.com.br/blog e grava
 
 Desenvolvido API e utilizado ajax para o consumo do mesmo.
 
+### Documentação da API
+
+https://documenter.getpostman.com/view/6064006/S1ENzzFp
+
 ### Instruções para rodar a aplicação : 
 
 
